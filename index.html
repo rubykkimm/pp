@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payroll Partners</title>
-    <!-- 프리텐다드 폰트 불러오기 -->
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
     <style>
         :root {
@@ -45,14 +44,14 @@
         .title-banner h1 {
             font-size: 2.6rem;
             color: var(--brand-color);
-            font-weight: 800;
+            font-weight: 700; /* 기존 800에서 살짝 얇게 수정 */
             letter-spacing: -0.5px;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
         }
 
         .title-banner p {
-            font-size: 1.3rem; /* 적당한 크기 조절 */
-            color: var(--text-main); /* 하얀 글씨 */
+            font-size: 1.3rem;
+            color: var(--text-main);
             font-weight: 500;
             letter-spacing: -0.3px;
         }
@@ -186,13 +185,12 @@
 
     <div class="title-banner">
         <h1>"왜 타사 급여대행은 3가지를 동시에 만족할 수 없을까요?"</h1>
-        <p>오직 Payroll Partners만이 가능합니다.</p>
+        <p>오직 Payroll Partners만이 이 세가지를 '동시에' 해결합니다.</p>
     </div>
 
     <div class="container">
         <div id="virtual-cursor"></div>
 
-        <!-- LEFT: Competitor -->
         <div class="side-card competitor" id="card-comp">
             <div class="side-title">타 급여대행</div>
             
@@ -212,7 +210,6 @@
             </div>
         </div>
 
-        <!-- RIGHT: Payroll Partners (처음부터 끝까지 항상 모두 ON) -->
         <div class="side-card payroll-partners" id="card-pp">
             <div class="side-title">Payroll Partners</div>
             
@@ -233,7 +230,6 @@
         </div>
     </div>
 
-    <!-- 하단에 작고 투명하게 배치한 재생 버튼 -->
     <button class="control-btn" onclick="startAnimation()">재생</button>
 
     <script>
@@ -246,7 +242,9 @@
             document.getElementById('comp-t2').classList.add('active');
             document.getElementById('comp-t3').classList.remove('active');
 
-            // 타사 뫼비우스 토글 루프 연출 (우측은 절대 건드리지 않음)
+            // --- 타사 무한 딜레마 루프 연출 (총 6회 클릭 모션) ---
+            
+            // [1회전] 3번 켜기 (1번 꺼짐)
             setTimeout(() => {
                 moveCursor('#card-comp #comp-t3 .switch');
                 setTimeout(() => {
@@ -255,6 +253,7 @@
                 }, 600);
             }, 500);
 
+            // [1회전] 1번 켜기 (2번 꺼짐)
             setTimeout(() => {
                 moveCursor('#card-comp #comp-t1 .switch');
                 setTimeout(() => {
@@ -263,6 +262,7 @@
                 }, 600);
             }, 2000);
 
+            // [1회전] 2번 켜기 (3번 꺼짐)
             setTimeout(() => {
                 moveCursor('#card-comp #comp-t2 .switch');
                 setTimeout(() => {
@@ -271,9 +271,37 @@
                 }, 600);
             }, 3500);
 
+            // [2회전 추가] 다시 3번 켜기 (1번 꺼짐)
+            setTimeout(() => {
+                moveCursor('#card-comp #comp-t3 .switch');
+                setTimeout(() => {
+                    document.getElementById('comp-t3').classList.add('active');
+                    document.getElementById('comp-t1').classList.remove('active');
+                }, 600);
+            }, 5000);
+
+            // [2회전 추가] 다시 1번 켜기 (2번 꺼짐)
+            setTimeout(() => {
+                moveCursor('#card-comp #comp-t1 .switch');
+                setTimeout(() => {
+                    document.getElementById('comp-t1').classList.add('active');
+                    document.getElementById('comp-t2').classList.remove('active');
+                }, 600);
+            }, 6500);
+
+            // [2회전 추가] 다시 2번 켜기 (3번 꺼짐으로 최종 루프 마감)
+            setTimeout(() => {
+                moveCursor('#card-comp #comp-t2 .switch');
+                setTimeout(() => {
+                    document.getElementById('comp-t2').classList.add('active');
+                    document.getElementById('comp-t3').classList.remove('active');
+                }, 600);
+            }, 8000);
+
+            // 애니메이션 종료 후 커서 숨김
             setTimeout(() => {
                 cursor.style.display = 'none';
-            }, 5000);
+            }, 9500);
         }
 
         function moveCursor(selector) {
